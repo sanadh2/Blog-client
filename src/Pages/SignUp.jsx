@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { Theme } = useContext(DarkMode);
+  const { theme, isLightMode } = useContext(DarkMode);
 
   const [formData, setformData] = useState({
     name: "",
@@ -70,31 +70,35 @@ const SignUp = () => {
   };
 
   return (
-    <div className=" min-h-screen flex flex-col justify-center md:flex-row w-full items-center">
-      <div className="w-[50vw] md:flex flex-col px-2 md:px-20 justify-center items-center hidden  ">
+    <div className=" min-h-screen flex flex-col justify-evenly md:flex-row w-full items-center ">
+      <div className="w-3/5 md:flex flex-col px-2 md:px-16 justify-center items-center hidden  ">
         <h1 className="font-velodroma-wide text-4xl whitespace-nowrap">
           Sign Up
         </h1>
-        <p className="text-xl mt-10 font-light">
+        <p className="text-xl mt-10 font-light select-none cursor-text">
           "Welcome to{" "}
           <span className=" font-against font-medium">Blog and Blogger</span>!
           🚀 Start your journey by creating an account. It only takes a minute!
           🌟"
         </p>
       </div>
+      <h1 className="font-velodroma-wide text-4xl block md:hidden font-light whitespace-nowrap">
+        Sign Up
+      </h1>
       <form
-        className=" w-full md:w-[50vw]"
+        className=" w-full md:w-2/5"
         action=""
         method="post"
         onSubmit={onSubmit}
       >
         <div className=" flex flex-col justify-center gap-6 h-full items-center">
-          <h1 className="font-velodroma-wide text-4xl block md:hidden font-light whitespace-nowrap">
-            Sign Up
-          </h1>
           {/* fullName */}
           <div className="coolinput  flex justify-center items-center ">
-            <label htmlFor="name" className="text">
+            <label
+              htmlFor="name"
+              className="text"
+              style={{ backgroundColor: theme.bg, color: theme.text }}
+            >
               Full Name:
             </label>
             <input
@@ -104,7 +108,11 @@ const SignUp = () => {
               type="text"
               placeholder="write here"
               name="name"
-              className="input  placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e]"
+              className={`input outline outline-2   placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
+                isLightMode
+                  ? "outline-black/30 focus:outline-black"
+                  : "outline-white/30 focus:outline-white"
+              }`}
               id="name"
             />
             {formErrors.name && (
@@ -114,7 +122,11 @@ const SignUp = () => {
 
           {/* email */}
           <div className="coolinput  flex justify-center items-center ">
-            <label htmlFor="email" className="text">
+            <label
+              htmlFor="email"
+              className="text"
+              style={{ backgroundColor: theme.bg, color: theme.text }}
+            >
               Email:
             </label>
             <input
@@ -125,7 +137,11 @@ const SignUp = () => {
               id="email"
               placeholder="write here"
               name="email"
-              className="input  placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e]"
+              className={`input outline outline-2 placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
+                isLightMode
+                  ? "outline-black/30 focus:outline-black"
+                  : "outline-white/30 focus:outline-white"
+              }`}
             />
             {formErrors.email && (
               <p className="text-red-500 text-sm">{formErrors.email}</p>
@@ -134,7 +150,11 @@ const SignUp = () => {
 
           {/* username */}
           <div className="coolinput  flex justify-center items-center ">
-            <label htmlFor="username" className="text">
+            <label
+              htmlFor="username"
+              className="text"
+              style={{ backgroundColor: theme.bg, color: theme.text }}
+            >
               Username:
             </label>
             <input
@@ -144,7 +164,11 @@ const SignUp = () => {
               type="text"
               placeholder="write here"
               name="username"
-              className="input  placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e]"
+              className={`input outline outline-2   placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
+                isLightMode
+                  ? "outline-black/30 focus:outline-black"
+                  : "outline-white/30 focus:outline-white"
+              }`}
               id="username"
             />{" "}
             {formErrors.username && (
@@ -154,7 +178,11 @@ const SignUp = () => {
 
           {/* password */}
           <div className="coolinput  flex justify-center items-center ">
-            <label htmlFor="password" className="text">
+            <label
+              htmlFor="password"
+              className="text"
+              style={{ backgroundColor: theme.bg, color: theme.text }}
+            >
               Password
             </label>
             <input
@@ -165,20 +193,29 @@ const SignUp = () => {
               type="password"
               placeholder="write here"
               name="password"
-              className="input  placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e]"
+              className={`input outline outline-2   placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
+                isLightMode
+                  ? "outline-black/30 focus:outline-black"
+                  : "outline-white/30 focus:outline-white"
+              }`}
             />
             {formErrors.password && (
-              <p className="text-red-500 text-sm">{formErrors.password}</p>
+              <p className="text-red-500 text-sm justify-self-start">
+                {formErrors.password}
+              </p>
             )}
           </div>
 
-          <button className=" bg-[#F4442E] rounded-full px-4 py-1">
+          <button
+            style={{ backgroundColor: theme.text, color: theme.bg }}
+            className="rounded-full px-4 py-1 outline-none focus:shadow-lg focus:shadow-black/70"
+          >
             Sign Up
           </button>
           <p>
             Already a member? Try{" "}
             <span
-              className=" underline underline-offset-2 cursor-pointer decoration-slate-600"
+              className=" underline underline-offset-2 italic cursor-pointer "
               onClick={() => navigate("/")}
             >
               Logging In

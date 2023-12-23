@@ -5,7 +5,7 @@ axios.defaults.withCredentials = true;
 import { DarkMode } from "../Contexts/DarkMode";
 import { Link, Outlet } from "react-router-dom";
 const Navbar = () => {
-  const { theme, toggleTheme } = useContext(DarkMode);
+  const { theme, toggleTheme, isLightMode } = useContext(DarkMode);
   const [focus, setFocus] = useState("home");
 
   const { userData, setUserData } = useContext(UserData);
@@ -52,10 +52,14 @@ const Navbar = () => {
     >
       <nav
         style={{ boxShadow: "0px 1px 3px" }}
-        className="sticky z-50 bottom-0 sm:top-0 left-auto sm:left-0  flex flex-row flex-nowrap sm:flex-col justify-evenly items-center w-full sm:w-16 h-16 sm:h-screen"
+        className="sticky z-50 bottom-0 sm:top-0 left-auto sm:left-0  flex flex-row flex-nowrap sm:flex-col justify-evenly items-center w-full sm:w-[4rem] h-[4rem] sm:h-screen"
       >
         <button
-          className="w-12 p-1 rounded-full hover:bg-yellow-200 active:bg-yellow-400"
+          className={` w-12 p-1 rounded-full ${
+            isLightMode
+              ? "hover:bg-amber-200 active:bg-amber-300"
+              : "hover:bg-slate-700 active:bg-slate-600"
+          }`}
           onClick={toggleTheme}
         >
           <svg
@@ -73,7 +77,11 @@ const Navbar = () => {
         </button>
         <Link
           to={"/home"}
-          className="p-2 rounded-full hover:bg-yellow-200 active:bg-yellow-400 "
+          className={`p-1 rounded-full ${
+            isLightMode
+              ? "hover:bg-amber-200 active:bg-amber-300"
+              : "hover:bg-slate-700 active:bg-slate-600"
+          }`}
           onClick={() => setFocus("home")}
         >
           <svg
@@ -92,7 +100,11 @@ const Navbar = () => {
         </Link>
         <Link
           to={"/home/search"}
-          className="p-2 rounded-full hover:bg-yellow-200 active:bg-yellow-400 "
+          className={`p-1 rounded-full ${
+            isLightMode
+              ? "hover:bg-amber-200 active:bg-amber-300"
+              : "hover:bg-slate-700 active:bg-slate-600"
+          }`}
           onClick={() => setFocus("search")}
         >
           <svg
@@ -114,17 +126,21 @@ const Navbar = () => {
         </Link>
         <Link
           to="/home/new-blog"
-          className="p-2 rounded-full hover:bg-yellow-200 active:bg-yellow-400 "
+          className={`p-1 rounded-full ${
+            isLightMode
+              ? "hover:bg-amber-200 active:bg-amber-300"
+              : "hover:bg-slate-700 active:bg-slate-600"
+          }`}
           onClick={() => setFocus("blog")}
         >
           <svg
             aria-label="New post"
             className="x1lliihq x1n2onr6 x5n08af"
             fill="currentColor"
-            height="24"
+            height="30px"
             role="img"
             viewBox="0 0 24 24"
-            width="24"
+            width="30px"
             strokeWidth={focus == "blog" ? 2.5 : 1}
           >
             <title>New post</title>
@@ -159,7 +175,11 @@ const Navbar = () => {
         </Link>
         <Link
           to="/home/profile"
-          className="p-2 rounded-full hover:bg-yellow-200 active:bg-yellow-400 "
+          className={`p-1 rounded-full ${
+            isLightMode
+              ? "hover:bg-amber-200 active:bg-amber-300"
+              : "hover:bg-slate-700 active:bg-slate-600"
+          }`}
           onClick={() => setFocus("profile")}
         >
           <svg
