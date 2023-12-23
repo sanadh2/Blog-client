@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "against";
+  src: url("./Fonts/against/against_regular-webfont.woff2") format("woff2"),
+    url("./Fonts/against/against_regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+@font-face {
+  font-family: "velodroma";
+  src: url("./Fonts/velodroma/velodromabasic-regular-webfont.woff2")
+      format("woff2"),
+    url("./Fonts/velodroma/velodromabasic-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "velodroma_superwide";
+  src: url("./Fonts/velodroma/velodromabasic-superwide-webfont.woff2")
+      format("woff2"),
+    url("./Fonts/velodroma/velodromabasic-superwide-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "velodroma_wide";
+  src: url("./Fonts/velodroma/velodromabasic-wide-webfont.woff2")
+      format("woff2"),
+    url("./Fonts/velodroma/velodromabasic-wide-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}

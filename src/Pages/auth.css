@@ -1,0 +1,54 @@
+@font-face {
+  font-family: "HighriseFont";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../../Fonts/highrise/HighriseFont-Demo-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "HighriseFont";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../../Fonts/highrise/HighriseFont-Condensed-Demo.woff")
+    format("woff");
+}
+@font-face {
+  font-family: "HighriseFont";
+  font-style: normal;
+  font-weight: 700;
+  src: url("HighriseFont-Bold-Demo.woff") format("woff");
+}
+
+.coolinput {
+  display: flex;
+  flex-direction: column;
+  position: static;
+  max-width: 240px;
+  position: relative;
+}
+
+.coolinput label.text {
+  font-size: 0.75rem;
+  color: black;
+  font-weight: 700;
+  position: absolute;
+  top: -0.5rem;
+  left: -2rem;
+  margin: 0 0 0 7px;
+  padding: 0 3px;
+  background-color: #f2f3ae;
+  width: fit-content;
+  padding: 0 5px;
+}
+
+.coolinput input.input {
+  padding: 11px 10px;
+  border-radius: 5px;
+  width: 20rem;
+  background: transparent;
+  outline: 1.7px solid rgb(182, 182, 182);
+  transition: outline 0.3s ease-in-out;
+}
+
+.coolinput input.input:focus {
+  outline: 2px solid black;
+}
