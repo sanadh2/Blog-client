@@ -12,4 +12,4 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const dpDB = getStorage(app);
+export const DB = getStorage(app);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { dpDB } from "../firebase";
+import { DB } from "../firebase";
 import toast, { Toaster } from "react-hot-toast";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios";
@@ -9,7 +9,7 @@ const UploadDP = () => {
 
   const uploadDp = async () => {
     const imageName = new Date().getTime() + img.name;
-    const imageRef = ref(dpDB, `DPs/${imageName}`);
+    const imageRef = ref(DB, `DPs/${imageName}`);
     await uploadBytesResumable(imageRef, img);
     const url = await getDownloadURL(imageRef);
     return url;

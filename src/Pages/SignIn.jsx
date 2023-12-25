@@ -98,7 +98,7 @@ const SignIn = () => {
               required
               onChange={handleChange}
               value={formData.password}
-              type="text"
+              type="password"
               placeholder="write here"
               name="password"
               className={`input outline outline-2   placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${

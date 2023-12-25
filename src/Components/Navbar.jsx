@@ -51,8 +51,8 @@ const Navbar = () => {
       style={{ backgroundColor: theme.bg, color: theme.text }}
     >
       <nav
-        style={{ boxShadow: "0px 1px 3px" }}
-        className="sticky z-50 bottom-0 sm:top-0 left-auto sm:left-0  flex flex-row flex-nowrap sm:flex-col justify-evenly items-center w-full sm:w-[4rem] h-[4rem] sm:h-screen"
+        style={{ boxShadow: "0px 1px 3px", backgroundColor: theme.bg }}
+        className="sticky z-50 bottom-0 sm:top-0 left-auto sm:left-0  flex flex-row flex-nowrap sm:flex-col justify-evenly items-center w-screen sm:w-[4rem] h-[4rem] sm:h-screen"
       >
         <button
           className={` w-12 p-1 rounded-full ${

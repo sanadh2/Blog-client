@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import "./App.css";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
 import Home from "./Pages/Home";
@@ -11,9 +11,12 @@ import NewBlog from "./Pages/NewBlog";
 import Navbar from "./Components/Navbar";
 import { DarkMode } from "./Contexts/DarkMode";
 const App = () => {
-  const {theme}=useContext(DarkMode)
+  const { theme } = useContext(DarkMode);
   return (
-    <div style={{ color: theme.text, backgroundColor: theme.bg }}>
+    <div
+      style={{ color: theme.text, backgroundColor: theme.bg }}
+      className=" min-h-screen"
+    >
       <Router>
         <Routes>
           <Route path="/" element={<SignIn />} />
