@@ -10,6 +10,9 @@ import Search from "./Pages/Search";
 import NewBlog from "./Pages/NewBlog";
 import Navbar from "./Components/Navbar";
 import { DarkMode } from "./Contexts/DarkMode";
+import axios from "axios";
+import User from "./Pages/User";
+axios.defaults.withCredentials = true;
 const App = () => {
   const { theme } = useContext(DarkMode);
   return (
@@ -27,6 +30,7 @@ const App = () => {
             <Route path="Search" element={<Search />} />
             <Route path="new-blog" element={<NewBlog />} />
             <Route path="blog/:blogID" element={<BlogDetails />} />
+            <Route path="users/:userID" element={<User />} />
           </Route>
         </Routes>
       </Router>

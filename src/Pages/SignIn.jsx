@@ -34,7 +34,6 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSignIn(formData).then((res) => {
-      console.log(res);
       if (res.data.success == true) navigate("/home");
     });
   };

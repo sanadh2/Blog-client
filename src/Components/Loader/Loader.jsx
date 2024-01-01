@@ -1,10 +1,10 @@
 import React from "react";
-import "./Loader.css";
 const Loader = () => {
   return (
-    <div className="absolute backdrop-blur-xl h-screen flex justify-center items-center w-screen">
-      <div className="loader"></div>
-    </div>
+    <div
+      style={{ borderTopColor: "transparent" }}
+      className="w-10 h-10 absolute z-50 top-1/2 left-1/2 border-[1px] border-white border-solid rounded-full animate-spin"
+    ></div>
   );
 };
 

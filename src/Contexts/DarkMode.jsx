@@ -36,7 +36,4 @@ const DarkModeProvider = ({ children }) => {
 };
 export default DarkModeProvider;
 
-// /* CSS HEX */
-// --rich-black: #11151cff;
-// --prussian-blue: #212d40ff;
-// --charcoal: ;
+

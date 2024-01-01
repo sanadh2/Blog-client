@@ -3,11 +3,15 @@ import { UserData } from "../Contexts/UserData";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 import { DarkMode } from "../Contexts/DarkMode";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const { theme, toggleTheme, isLightMode } = useContext(DarkMode);
-  const [focus, setFocus] = useState("home");
-
+  const location = useLocation().pathname;
+  const navigate = useNavigate();
+  const [focus, setFocus] = useState();
+  useEffect(() => {
+    setFocus(location);
+  });
   const { userData, setUserData } = useContext(UserData);
   let flag = true;
   const getUser = async () => {
@@ -47,15 +51,15 @@ const Navbar = () => {
 
   return (
     <div
-      className="relative min-h-[100svh] scroll-smooth flex flex-col-reverse sm:flex-row"
+      className="relative min-h-[100svh] scroll-smooth flex flex-col-reverse md:flex-row"
       style={{ backgroundColor: theme.bg, color: theme.text }}
     >
       <nav
         style={{ boxShadow: "0px 1px 3px", backgroundColor: theme.bg }}
-        className="sticky z-50 bottom-0 sm:top-0 left-auto sm:left-0  flex flex-row flex-nowrap sm:flex-col justify-evenly items-center w-screen sm:w-[4rem] h-[4rem] sm:h-screen"
+        className="sticky z-50 bottom-0 md:top-0 left-auto md:left-0  flex flex-row flex-nowrap md:flex-col justify-evenly items-center w-screen md:w-[4rem] h-[4rem] md:h-screen"
       >
         <button
-          className={` w-12 p-1 rounded-full ${
+          className={` w-12 h-12 p-1 rounded-[1000px] ${
             isLightMode
               ? "hover:bg-amber-200 active:bg-amber-300"
               : "hover:bg-slate-700 active:bg-slate-600"
@@ -82,11 +86,10 @@ const Navbar = () => {
               ? "hover:bg-amber-200 active:bg-amber-300"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
-          onClick={() => setFocus("home")}
         >
           <svg
             stroke={theme.text}
-            fill={focus == "home" ? theme.text : theme.bg}
+            fill={focus == "/home" ? theme.text : theme.bg}
             width="30px"
             height="30px"
             viewBox="0 0 24 24"
@@ -105,7 +108,6 @@ const Navbar = () => {
               ? "hover:bg-amber-200 active:bg-amber-300"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
-          onClick={() => setFocus("search")}
         >
           <svg
             width="30px"
@@ -118,7 +120,7 @@ const Navbar = () => {
             <path
               d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
               stroke={theme.text}
-              strokeWidth={`${focus == "search" ? 2.5 : 1}`}
+              strokeWidth={`${focus == "/home/search" ? 2.5 : 1}`}
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -131,17 +133,15 @@ const Navbar = () => {
               ? "hover:bg-amber-200 active:bg-amber-300"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
-          onClick={() => setFocus("blog")}
         >
           <svg
             aria-label="New post"
-            className="x1lliihq x1n2onr6 x5n08af"
             fill="currentColor"
             height="30px"
             role="img"
             viewBox="0 0 24 24"
             width="30px"
-            strokeWidth={focus == "blog" ? 2.5 : 1}
+            strokeWidth={focus == "/home/new-blog" ? 2.5 : 1}
           >
             <title>New post</title>
             <path
@@ -180,13 +180,12 @@ const Navbar = () => {
               ? "hover:bg-amber-200 active:bg-amber-300"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
-          onClick={() => setFocus("profile")}
         >
           <svg
             width="30px"
             height="30px"
             stroke={theme.text}
-            fill={focus == "profile" ? theme.text : "none"}
+            fill={focus == "/home/profile" ? theme.text : "none"}
             strokeWidth={1}
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"

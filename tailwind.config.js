@@ -16,6 +16,9 @@ export default {
           "Arial",
         ],
       },
+      screens: {
+        sm: "425px",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
