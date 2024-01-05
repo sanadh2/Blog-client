@@ -12,6 +12,7 @@ import Navbar from "./Components/Navbar";
 import { DarkMode } from "./Contexts/DarkMode";
 import axios from "axios";
 import User from "./Pages/User";
+import EditProfile from "./Pages/EditProfile";
 axios.defaults.withCredentials = true;
 const App = () => {
   const { theme } = useContext(DarkMode);
@@ -31,6 +32,7 @@ const App = () => {
             <Route path="new-blog" element={<NewBlog />} />
             <Route path="blog/:blogID" element={<BlogDetails />} />
             <Route path="users/:userID" element={<User />} />
+            <Route path="edit-profile" element={<EditProfile />} />
           </Route>
         </Routes>
       </Router>

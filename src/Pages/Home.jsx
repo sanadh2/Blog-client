@@ -3,22 +3,29 @@ import React, { useContext, useEffect, useState } from "react";
 import Blog from "../Components/Blog";
 import Loader from "../Components/Loader/Loader";
 import toast, { Toaster } from "react-hot-toast";
+import { UserData } from "../Contexts/UserData";
 
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
+  const { userData } = useContext(UserData);
   const [loading, setLoading] = useState(true);
   const getBlogs = async () => {
     try {
-      const result = await axios.get("http://localhost:2222/blog/blogs");
-      return result.data.result;
+      const result = await axios.get(
+        `http://localhost:2222/blog/following/${userData._id}`
+      );
+      return result.data.followingBlogs;
     } catch (err) {
       toast.error("error");
     }
   };
+
   useEffect(() => {
-    getBlogs().then((res) => setBlogs(res));
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
+    if (userData) {
+      getBlogs().then((res) => setBlogs(res));
+      setTimeout(() => setLoading(false), 1000);
+    }
+  }, [userData]);
 
   if (loading) return <Loader />;
   return (
@@ -28,7 +35,7 @@ const Home = () => {
       </h1>
       <Toaster position="top right" />
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
-        {blogs.map((blog) => (
+        {blogs?.map((blog) => (
           <Blog key={blog._id} blog={blog} />
         ))}
       </div>

@@ -19,7 +19,7 @@ const NewBlog = () => {
     images: [],
     category: "How-to Guides",
   });
-
+  console.log(blogForm.category);
   const uploadImage = async (image) => {
     try {
       const storageRef = ref(DB, `blog/${image.name}+${new Date().getTime()}`);
@@ -193,7 +193,19 @@ const NewBlog = () => {
             <option value="Guest Posts">Guest Posts</option>
             <option value="Roundup Posts">Roundup Posts</option>
             <option value="Behind-the-Scenes">Behind-the-Scenes</option>
-            <option value="FAQs (Frequently Asked Questions)">FAQ</option>
+            <option value="Technology">Technology</option>
+            <option value="FAQs (Frequently Asked Questions)">
+              FAQs (Frequently Asked Questions)
+            </option>
+            <option value="Health and Wellness">Health and Wellness</option>
+            <option value="Science">Science</option>
+            <option value="Nature">Nature</option>
+            <option value="Food and Travel">Food and Travel</option>
+            <option value="History">History</option>
+            <option value="Travel">Travel</option>
+            <option value="Photography">Photography</option>
+            <option value="Exploration">Exploration</option>
+            <option value="Wildlife">Wildlife</option>
           </select>
         </div>
         {/* images */}

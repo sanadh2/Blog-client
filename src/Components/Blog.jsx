@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { DarkMode } from "../Contexts/DarkMode";
 import ReactHtmlParser from "html-react-parser";
 const Blog = ({ blog }) => {
-  const navigate = useNavigate();
   const { theme } = useContext(DarkMode);
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -29,9 +28,9 @@ const Blog = ({ blog }) => {
                 >
                   {blog.title}
                 </h1>
-                <p className="leading-relaxed mb-3 line-clamp-3">
+                <div className="leading-relaxed mb-3 line-clamp-3">
                   {ReactHtmlParser(blog.content)}
-                </p>
+                </div>
                 <div className="flex items-center flex-wrap ">
                   <Link
                     to={`/home/blog/${blog._id}`}

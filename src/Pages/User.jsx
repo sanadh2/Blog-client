@@ -4,11 +4,15 @@ import { useParams } from "react-router-dom";
 import Blog from "../Components/Blog";
 import { DarkMode } from "../Contexts/DarkMode";
 import Loader from "../Components/Loader/Loader";
+import { UserData } from "../Contexts/UserData";
+import toast from "react-hot-toast";
 
 const User = () => {
   const { userID } = useParams();
-  const { theme } = useContext(DarkMode);
+  const { userData, setRefreshUser } = useContext(UserData);
+  const { theme, isLightMode } = useContext(DarkMode);
   const [user, setUser] = useState();
+  const [refresh, setRefresh] = useState(false);
   useEffect(() => {
     const getUser = async () => {
       const result = await axios.get(
@@ -17,7 +21,25 @@ const User = () => {
       setUser(result.data.user);
     };
     getUser();
-  }, []);
+  }, [refresh]);
+
+  const follow = async () => {
+    try {
+      const res = await axios.patch("http://localhost:2222/user/follow", {
+        followeeID: user._id,
+        userID: userData._id,
+      });
+      setRefresh(!refresh);
+      setRefreshUser((prev) => !prev);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handlefollow = () => {
+    if (!userData || !user) toast.error("Please Log In");
+    follow();
+  };
 
   const Details = ({ title, type }) => {
     return (
@@ -27,9 +49,9 @@ const User = () => {
       </div>
     );
   };
+  console.log(userData);
   return (
     <>
-      {" "}
       {user ? (
         <div className=" h-full flex flex-col   w-full">
           <div className="h-[40vh] md:h-[35vh] p-5 sm:px-10 lg:px-16">
@@ -51,6 +73,14 @@ const User = () => {
               {user.role == "admin" && <p className="text-[#00ff00]">admin</p>}
               <p className=" opacity-55 truncate ">{user.email}</p>
             </div>
+            {user?.username !== userData?.username && (
+              <button
+                onClick={handlefollow}
+                className={`inline-flex text-white bg-green-500 hover:shadow-md active:shadow-none   border-0 py-1 px-4 focus:outline-none hover:bg-green-600 rounded `}
+              >
+                {userData?.following.includes(user._id) ? "unfollow" : "follow"}
+              </button>
+            )}
           </div>
 
           <div className="min-h-[65vh] w-full grid grid-cols-1 place-items-center  md:grid-cols-2 lg:grid-cols-3 gap-10">

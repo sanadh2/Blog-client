@@ -35,5 +35,3 @@ const DarkModeProvider = ({ children }) => {
   );
 };
 export default DarkModeProvider;
-
-

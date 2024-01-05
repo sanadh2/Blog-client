@@ -16,3 +16,19 @@ textarea::-webkit-scrollbar-thumb {
 text::-webkit-scrollbar-track {
   background-color: #000;
 }
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-container > .btn:focus + .modal,
+.modal:focus {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.grid-flow-col::-webkit-scrollbar {
+  height: 10px;
+  width: auto;
+}

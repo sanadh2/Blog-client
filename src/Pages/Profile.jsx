@@ -9,17 +9,8 @@ import { DarkMode } from "../Contexts/DarkMode";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { theme, isLightTheme } = useContext(DarkMode);
+  const { theme, isLightMode } = useContext(DarkMode);
   const { userData } = useContext(UserData);
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
-  // useEffect(() => {
-  //   if (!userData) navigate("/");
-  // });
 
   const Details = ({ title, type }) => {
     return (
@@ -40,10 +31,21 @@ const Profile = () => {
             alt=""
             className="h-20 w-20 sm:h-24 sm:w-24 md:w-32 md:h-32  object-cover object-center rounded-full"
           />
-          <div className="flex gap-3 justify-center items-center">
-            <Details title={"Blogs"} type={userData.blogs} />
-            <Details title={"Followers"} type={userData.followers} />
-            <Details title={"Following"} type={userData.following} />
+          <div className="flex flex-col md:flex-row gap-3 justify-center items-center">
+            <div className="flex gap-3">
+              <Details title={"Blogs"} type={userData.blogs} />
+              <Details title={"Followers"} type={userData.followers} />
+              <Details title={"Following"} type={userData.following} />
+            </div>
+
+            <div className=" flex justify-center items-center">
+              <button
+                onClick={() => navigate("/home/edit-profile")}
+                className=" bg-transparent px-4 py-1 rounded whitespace-nowrap border-2"
+              >
+                Edit Profile
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex w-20  flex-col items-start">
