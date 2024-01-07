@@ -23,7 +23,8 @@ const Navbar = () => {
       });
       return result.data;
     } catch (err) {
-      console.log(err);
+      if (err.response) console.error(err.response.data);
+       navigate("/");
     }
   };
 
@@ -35,7 +36,7 @@ const Navbar = () => {
       return result.data;
     } catch (err) {
       if (err.response) console.error(err.response.data);
-      console.log(err);
+       navigate("/");
     }
   };
 
@@ -59,8 +60,6 @@ const Navbar = () => {
       console.log(error);
     }
   };
-
-  
 
   return (
     <div
@@ -224,7 +223,7 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-7 h-7"
             >
               <path
                 strokeLinecap="round"

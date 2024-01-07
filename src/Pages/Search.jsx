@@ -8,7 +8,7 @@ import Loader from "../Components/Loader/Loader";
 import axios from "axios";
 import Userlist from "../Components/Userlist";
 import { trim } from "lodash";
-import Select from "react-select";
+
 const Search = () => {
   const { isLightMode } = useContext(DarkMode);
   const [blogs, setBlogs] = useState([]);
@@ -17,30 +17,27 @@ const Search = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [search, setSearch] = useState("");
   const categories = [
-    { value: "", label: "All" },
-    { value: "How-to Guides", label: "How-to Guides" },
-    { value: "Listicles", label: "Listicles" },
-    { value: "Interviews", label: "Interviews" },
-    { value: "Reviews", label: "Reviews" },
-    { value: "Case Studies", label: "Case Studies" },
-    { value: "Personal Stories", label: "Personal Stories" },
-    { value: "Guest Posts", label: "Guest Posts" },
-    { value: "Roundup Posts", label: "Roundup Posts" },
-    { value: "Behind-the-Scenes", label: "Behind-the-Scenes" },
-    { value: "Technology", label: "Technology" },
-    {
-      value: "FAQs (Frequently Asked Questions)",
-      label: "FAQs (Frequently Asked Questions)",
-    },
-    { value: "Health and Wellness", label: "Health and Wellness" },
-    { value: "Science", label: "Science" },
-    { value: "Nature", label: "Nature" },
-    { value: "Food and Travel", label: "Food and Travel" },
-    { value: "History", label: "History" },
-    { value: "Travel", label: "Travel" },
-    { value: "Photography", label: "Photography" },
-    { value: "Exploration", label: "Exploration" },
-    { value: "Wildlife", label: "Wildlife" },
+    "All",
+    "How-to Guides",
+    "Listicles",
+    "Interviews",
+    "Reviews",
+    "Case Studies",
+    "Personal Stories",
+    "Guest Posts",
+    "Roundup Posts",
+    "Behind-the-Scenes",
+    "Technology",
+    "FAQs (Frequently Asked Questions)",
+    "Health and Wellness",
+    "Science",
+    "Nature",
+    "Food and Travel",
+    "History",
+    "Travel",
+    "Photography",
+    "Exploration",
+    "Wildlife",
   ];
 
   const getBlogs = async () => {
@@ -91,36 +88,30 @@ const Search = () => {
       ) : (
         <>
           <div className={` px-3 flex gap-2 items-center  `}>
-            Sort blogs:
-            <Select
-              onChange={(e) => setSort(e.value)}
-              className=" w-full max-w-[20rem] "
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 5,
-                colors: {
-                  ...theme.colors,
-                  neutral0: theme.text,
-                  primary: "none",
-                },
-              })}
-              styles={{
-                option: (provided, state) => ({
-                  ...provided,
-                  backgroundColor: state.isFocused ? "#6366f1" : "gray",
-                  color: state.isSelected ? "white" : provided.color,
-                }),
-                singleValue: (provided) => ({
-                  ...provided,
-                  color: "white",
-                }),
-                control: (provided, state) => ({
-                  ...provided,
-                  borderColor: "gray",
-                }),
-              }}
-              options={categories}
-            />
+            <label htmlFor="selectBlog">Sort blogs:</label>
+            <select
+              name=""
+              id="selectBlog"
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              className={`outline-none border  px-4 py-1 ${
+                isLightMode
+                  ? " border-black text-black"
+                  : "border-white text-white bg-[#11151cff]"
+              } `}
+            >
+              {categories.map((category) => (
+                <option
+                  value={category == "All" ? "" : category}
+                  key={category}
+                  className={`${
+                    isLightMode ? "bg-[#F2F3AE]" : "bg-[#11151cff]"
+                  } border `}
+                >
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
           {loading ? (
             <Loader />
