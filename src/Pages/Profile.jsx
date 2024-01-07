@@ -20,6 +20,7 @@ const Profile = () => {
       </div>
     );
   };
+  console.log(userData);
   if (!userData) return <Loader />;
   return (
     <div className=" h-full flex flex-col   w-full">
@@ -41,7 +42,8 @@ const Profile = () => {
             <div className=" flex justify-center items-center">
               <button
                 onClick={() => navigate("/home/edit-profile")}
-                className=" bg-transparent px-4 py-1 rounded whitespace-nowrap border-2"
+                style={{ borderColor: theme.text }}
+                className=" bg-transparent px-4 py-1 rounded whitespace-nowrap border opacity-100 hover:opacity-50"
               >
                 Edit Profile
               </button>
@@ -50,7 +52,13 @@ const Profile = () => {
         </div>
         <div className="flex w-20  flex-col items-start">
           <p>{userData.username}</p>
-          {userData.role == "admin" && <p className="text-[#00ff00]">admin</p>}
+          {userData.role == "admin" && (
+            <p
+              className={`${isLightMode ? "text-[#463dae]" : "text-[#00ff00]"}`}
+            >
+              admin
+            </p>
+          )}
           <p className=" opacity-55 truncate ">{userData.email}</p>
         </div>
       </div>

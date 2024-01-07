@@ -9,7 +9,7 @@ import axios from "axios";
 
 const NewBlog = () => {
   const [URLS, setURLS] = useState([]);
-  const { isLightMOde, theme } = useContext(DarkMode);
+  const { isLightMode, theme } = useContext(DarkMode);
   const [imagesUploaded, setImagesUploaded] = useState(false);
   const navigate = useNavigate();
   const { userData } = useContext(UserData);
@@ -181,7 +181,9 @@ const NewBlog = () => {
             id="category"
             onChange={onChange}
             value={blogForm.category}
-            className={` h-10  rounded placeholder:font-serif tracking-tighter placeholder:text-current/70 placeholder:font-light focus:placeholder:font-medium focus:placeholder:text-[#356e32] bg-transparent py-2 pl-3 w-full  outline-none border-2 focus:border-[#356e32]`}
+            className={` h-10  rounded placeholder:font-serif tracking-tighter placeholder:text-current/70 placeholder:font-light focus:placeholder:font-medium focus:placeholder:text-[#356e32] bg-transparent py-2 pl-3 w-full  outline-none border-2 ${
+              isLightMode ? "border-black" : "border-white"
+            } focus:border-[#356e32]`}
             style={{ backgroundColor: theme.bg }}
           >
             <option value="How-to Guides">How-to Guides</option>
@@ -216,7 +218,9 @@ const NewBlog = () => {
           <label
             tabIndex={0}
             htmlFor="images"
-            className={` h-10 flex gap-1 cursor-pointer hover:opacity-65    rounded placeholder:font-serif tracking-tighter placeholder:text-current/70 placeholder:font-light focus:placeholder:font-medium focus:placeholder:text-[#356e32] bg-transparent py-2 pl-3 w-full outline-none  border-2 focus:border-[#356e32]`}
+            className={` h-10 flex gap-1 cursor-pointer hover:opacity-65    rounded placeholder:font-serif tracking-tighter placeholder:text-current/70 placeholder:font-light focus:placeholder:font-medium focus:placeholder:text-[#356e32] bg-transparent py-2 pl-3 w-full outline-none  border-2 ${
+              isLightMode ? "border-black" : "border-white"
+            } focus:border-[#356e32]`}
             style={{ backgroundColor: theme.bg }}
           >
             <svg

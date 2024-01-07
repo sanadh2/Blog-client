@@ -8,6 +8,7 @@ import Loader from "../Components/Loader/Loader";
 import axios from "axios";
 import Userlist from "../Components/Userlist";
 import { trim } from "lodash";
+import Select from "react-select";
 const Search = () => {
   const { isLightMode } = useContext(DarkMode);
   const [blogs, setBlogs] = useState([]);
@@ -16,27 +17,32 @@ const Search = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [search, setSearch] = useState("");
   const categories = [
-    "How-to Guides",
-    "Listicles",
-    "Interviews",
-    "Reviews",
-    "Case Studies",
-    "Personal Stories",
-    "Guest Posts",
-    "Roundup Posts",
-    "Behind-the-Scenes",
-    "Technology",
-    "FAQs (Frequently Asked Questions)",
-    "Health and Wellness",
-    "Science",
-    "Nature",
-    "Food and Travel",
-    "History",
-    "Travel",
-    "Photography",
-    "Exploration",
-    "Wildlife",
+    { value: "", label: "All" },
+    { value: "How-to Guides", label: "How-to Guides" },
+    { value: "Listicles", label: "Listicles" },
+    { value: "Interviews", label: "Interviews" },
+    { value: "Reviews", label: "Reviews" },
+    { value: "Case Studies", label: "Case Studies" },
+    { value: "Personal Stories", label: "Personal Stories" },
+    { value: "Guest Posts", label: "Guest Posts" },
+    { value: "Roundup Posts", label: "Roundup Posts" },
+    { value: "Behind-the-Scenes", label: "Behind-the-Scenes" },
+    { value: "Technology", label: "Technology" },
+    {
+      value: "FAQs (Frequently Asked Questions)",
+      label: "FAQs (Frequently Asked Questions)",
+    },
+    { value: "Health and Wellness", label: "Health and Wellness" },
+    { value: "Science", label: "Science" },
+    { value: "Nature", label: "Nature" },
+    { value: "Food and Travel", label: "Food and Travel" },
+    { value: "History", label: "History" },
+    { value: "Travel", label: "Travel" },
+    { value: "Photography", label: "Photography" },
+    { value: "Exploration", label: "Exploration" },
+    { value: "Wildlife", label: "Wildlife" },
   ];
+
   const getBlogs = async () => {
     try {
       const result = await axios.get("http://localhost:2222/blog/blogs");
@@ -52,7 +58,7 @@ const Search = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full overflow-hidden">
+    <div className="min-h-svh w-full ">
       <Toaster />
       <header className=" flex justify-center py-5 ">
         <input
@@ -70,7 +76,7 @@ const Search = () => {
             e.target.value = trim(e.target.value);
             setSearch(e.target.value);
           }}
-          placeholder="Search"
+          placeholder="Search Users"
         />
       </header>
       {openSearch ? (
@@ -84,40 +90,56 @@ const Search = () => {
         </div>
       ) : (
         <>
-          <div
-            className={`  grid pl-2  grid-flow-col auto-cols-auto gap-2 overflow-x-scroll overscroll-contain snap-mandatory snap-x`}
-          >
-            <button
-              onClick={() => setSort("")}
-              className={`px-3 py-0.5 rounded whitespace-nowrap overscroll-x-auto snap-center  ${
-                isLightMode ? "bg-black text-white " : "bg-white/60 text-black"
-              }`}
-            >
-              All
-            </button>
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSort(category)}
-                className={`px-3 py-0.5 rounded whitespace-nowrap  overscroll-x-auto snap-center ${
-                  isLightMode
-                    ? "bg-black text-white "
-                    : "bg-white/60 text-black"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+          <div className={` px-3 flex gap-2 items-center  `}>
+            Sort blogs:
+            <Select
+              onChange={(e) => setSort(e.value)}
+              className=" w-full max-w-[20rem] "
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 5,
+                colors: {
+                  ...theme.colors,
+                  neutral0: theme.text,
+                  primary: "none",
+                },
+              })}
+              styles={{
+                option: (provided, state) => ({
+                  ...provided,
+                  backgroundColor: state.isFocused ? "#6366f1" : "gray",
+                  color: state.isSelected ? "white" : provided.color,
+                }),
+                singleValue: (provided) => ({
+                  ...provided,
+                  color: "white",
+                }),
+                control: (provided, state) => ({
+                  ...provided,
+                  borderColor: "gray",
+                }),
+              }}
+              options={categories}
+            />
           </div>
           {loading ? (
             <Loader />
           ) : (
-            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
-              {blogs
-                ?.filter((blog) => blog.category.includes(sort))
-                .map((blog) => (
-                  <Blog key={blog._id} blog={blog} />
-                ))}
+            <div className="">
+              {blogs?.filter((blog) => blog.category.includes(sort)).length ==
+              0 ? (
+                <div className=" flex  justify-center items-center">
+                  No blogs
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
+                  {blogs
+                    ?.filter((blog) => blog.category.includes(sort))
+                    .map((blog) => (
+                      <Blog key={blog._id} blog={blog} />
+                    ))}
+                </div>
+              )}
             </div>
           )}
         </>

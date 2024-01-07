@@ -16,91 +16,62 @@ import "./blog.css";
 const BlogDetails = () => {
   const { blogID } = useParams();
   const [reload, setReload] = useState(true);
-  const { userData } = useContext(UserData);
+  const { userData, setRefreshUser } = useContext(UserData);
   const [blogInfo, setBlogInfo] = useState(undefined);
   const { isLightMode, theme } = useContext(DarkMode);
   const [comment, setComment] = useState("");
 
   const [openModal, setOpenModal] = useState(false);
-
   const navigate = useNavigate();
+
   const getBlogInfo = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:2222/blog/blogs/${blogID}`
+        `http://localhost:2222/blog/blogs/single?blogID=${blogID}&userID=${userData._id}`
       );
-      return result.data.blog;
-    } catch (err) {
-      toast.error("error");
+      return result.data;
+    } catch (error) {
+      console.log(error);
     }
-  };
-
-  const addLikeUnlike = async () => {
-    try {
-      const result = await axios.patch(
-        `http://localhost:2222/blog/blogs/likeUnlike`,
-        {
-          userID: userData._id,
-          blogID,
-        }
-      );
-      setReload(!reload);
-      // console.log(result.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const [modal, setModal] = useState(false);
-
-  const likeHandler = () => {
-    if (!userData) console.log("no data");
-    addLikeUnlike();
-  };
-
-  const deleteBlog = async () => {
-    try {
-      const result = await axios.delete(
-        `http://localhost:2222/blog/blogs?blogID=${blogInfo._id}&userID=${userData._id}`
-      );
-
-      navigate(-1);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const addComment = async () => {
-    try {
-      const res = await axios.post(
-        "http://localhost:2222/comment/add-comment",
-        {
-          comment,
-          blogID: blogInfo._id,
-          userID: userData._id,
-        }
-      );
-      setComment("");
-      setReload(!reload);
-    } catch {
-      console.log("error");
-    }
-  };
-  const commentHandler = () => {
-    if (comment.length < 1) return;
-    if (!userData) toast.error("please Login");
-    addComment();
   };
 
   useEffect(() => {
-    getBlogInfo().then((result) => setTimeout(() => setBlogInfo(result), 1000));
-  }, [reload]);
+    if (userData) getBlogInfo().then((res) => setBlogInfo(res.blog));
+  }, [userData, reload]);
+
   let contentHTML;
   if (blogInfo?.content) {
     contentHTML = DOMPurify.sanitize(blogInfo.content);
   }
 
+  const likeUnlikeBlog = async () => {
+    try {
+      if (!blogInfo || !userData) return;
+      const result = await axios.patch(
+        `http://localhost:2222/blog/blogs/like-unlike`,
+        { blogID: blogInfo._id, userID: userData._id }
+      );
+      setReload((prev) => !prev);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addComment = async () => {
+    try {
+      if (!blogInfo || !userID || comment.length < 1) return;
+      const result = await axios.post(
+        `http://localhost:2222/comment/add-comment`,
+        { comment, blogID: blogInfo._id, userID: userID._id }
+      );
+      // setRefreshUser((prev) => !prev);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="h-full px-3 sm:px-7 md:px-10 pb-10 lg:px-12 xl:px-16  w-full min-h-screen overflow-hidden">
+    <div className=" px-3 sm:px-7 md:px-10 pb-10 lg:px-12 xl:px-16  w-full min-h-screen overflow-hidden">
       {blogInfo ? (
         <div className="w-full">
           <h1 className=" font-velodroma-wide my-10 text-xl md:text-3xl leading-relaxed text-left font-bold pl-3    w-fit ">
@@ -134,19 +105,20 @@ const BlogDetails = () => {
 
           <p className=" mb-5">
             Author: &nbsp;&nbsp;
-            <span
-              className=" text-[#ff0000] cursor-pointer"
+            <button
+              className=" text-[#00ff00] cursor-pointer font-bold text-xl font-velodroma  opacity-100 hover:opacity-65"
               onClick={() => navigate(`/home/users/${blogInfo.authorID._id}`)}
             >
               {blogInfo?.authorID.name}
-            </span>
+            </button>
           </p>
 
           <div className="w-full flex justify-between  items-center mb-10">
             <Like
               text={"like"}
-              onClick={likeHandler}
-              likes={blogInfo?.likes.length}
+              onClick={() => likeUnlikeBlog()}
+              likeInfo={blogInfo?.likes}
+              userID={userData._id}
             />
             <div className="Comment w-3/4  flex gap-1">
               <input
@@ -160,7 +132,7 @@ const BlogDetails = () => {
                 id="comment"
               />
               <button
-                onClick={commentHandler}
+                onClick={() => addComment()}
                 className={`px-4 py-1 ${
                   isLightMode ? "bg-white" : "bg-slate-800"
                 }`}
@@ -174,7 +146,10 @@ const BlogDetails = () => {
               (userData?.role === "admin" ||
                 blogInfo.authorID._id === userData?._id) && (
                 <div>
-                  <button className="" onClick={() => setOpenModal(true)}>
+                  <button
+                    className=" opacity-100 hover:opacity-65"
+                    onClick={() => setOpenModal(true)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

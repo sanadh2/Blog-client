@@ -19,7 +19,7 @@ const App = () => {
   return (
     <div
       style={{ color: theme.text, backgroundColor: theme.bg }}
-      className=" min-h-screen"
+      className=" min-h-screen "
     >
       <Router>
         <Routes>

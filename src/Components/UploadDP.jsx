@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { DB } from "../firebase";
 import toast, { Toaster } from "react-hot-toast";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios";
+import { UserData } from "../Contexts/UserData";
 
-const UploadDP = () => {
+const UploadDP = ({ open, closeModal, lightMode, setRefreshUser }) => {
   const [img, setImg] = useState();
-
+  const { userData: user } = useContext(UserData);
   const uploadDp = async () => {
     const imageName = new Date().getTime() + img.name;
     const imageRef = ref(DB, `DPs/${imageName}`);
@@ -21,8 +22,9 @@ const UploadDP = () => {
       const url = await uploadDp();
       const res = await axios.patch("http://localhost:2222/user/uploaddp", {
         imageDp: url,
-        userID: "65853eb38cf11443262c659b",
+        userID: user._id,
       });
+      setRefreshUser((prev) => !prev);
       toast.success(res.data.msg);
       return res;
     } catch (err) {
@@ -30,22 +32,41 @@ const UploadDP = () => {
     }
   };
   const handleClick = () => {
-    uploadUrl().then((res) => console.log(res));
+    uploadUrl().then((res) => closeModal());
   };
 
+  if (!open) return null;
+
   return (
-    <div>
+    <div className="p-10 lg:p-20 fixed backdrop-blur left-0 right-0 top-0 bottom-0 flex justify-center items-center">
       <Toaster />
-      <input
-        type="file"
-        name=""
-        id=""
-        onChange={(e) => setImg(e.target.files[0])}
-      />
-      <button className="px-4 py-1 bg-black text-white" onClick={handleClick}>
-        {" "}
-        Upload
-      </button>
+      <div
+        className={`p-5 relative min-h-80 w-full max-w-[30rem] flex flex-wrap justify-center items-center  ${
+          lightMode ? " bg-[#F2F3AE]" : " bg-[#1d2430] text-white"
+        }`}
+      >
+        <button
+          type="button"
+          className="absolute top-3 right-5 text-2xl"
+          onClick={closeModal}
+        >
+          &times;
+        </button>
+        <input
+          type="file"
+          name=""
+          id=""
+          onChange={(e) => setImg(e.target.files[0])}
+        />
+        <button
+          type="button"
+          className="px-4 py-1 bg-black text-white"
+          onClick={handleClick}
+        >
+          {" "}
+          Upload
+        </button>
+      </div>
     </div>
   );
 };
