@@ -137,7 +137,7 @@ const SignUp = () => {
               id="email"
               placeholder="write here"
               name="email"
-              className={`input outline outline-2 placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
+              className={`input outline lowercase outline-2 placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
                 isLightMode
                   ? "outline-black/30 focus:outline-black"
                   : "outline-white/30 focus:outline-white"
@@ -164,7 +164,7 @@ const SignUp = () => {
               type="text"
               placeholder="write here"
               name="username"
-              className={`input outline outline-2   placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
+              className={`input outline outline-2 lowercase   placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
                 isLightMode
                   ? "outline-black/30 focus:outline-black"
                   : "outline-white/30 focus:outline-white"

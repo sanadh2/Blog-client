@@ -19,7 +19,6 @@ const NewBlog = () => {
     images: [],
     category: "How-to Guides",
   });
-  console.log(blogForm.category);
   const uploadImage = async (image) => {
     try {
       const storageRef = ref(DB, `blog/${image.name}+${new Date().getTime()}`);
@@ -62,13 +61,15 @@ const NewBlog = () => {
         title: blogForm.title,
         content: blogForm.content,
         images: URLS,
-        authorID: userData._id,
+        userID: userData._id,
         category: blogForm.category,
       });
-
+      if (imagesUploaded) toast.success("Blog Uploaded");
       return result.data;
     } catch (err) {
-      toast.error("error");
+      console.log(err);
+      if (err.response?.data?.success == false)
+        toast.error(err.response.data.msg);
     }
   };
 
@@ -78,6 +79,7 @@ const NewBlog = () => {
         try {
           await createBlog();
         } catch (err) {
+          console.log(err);
           toast.error("Error creating blog");
         }
       }
@@ -90,7 +92,6 @@ const NewBlog = () => {
         content: "",
       })
     );
-    if (imagesUploaded) toast.success("Blog Uploaded");
   }, [imagesUploaded]);
 
   const submit = async (e) => {
@@ -254,12 +255,9 @@ const NewBlog = () => {
         <div className="flex flex-wrap gap-10">
           {blogForm.images.length > 0 &&
             blogForm.images.map((el, index) => (
-              <img
-                className=" h-10 "
-                key={index}
-                src={URL.createObjectURL(el)}
-                alt=""
-              />
+              <div key={index}>
+                <img className="h-10" src={URL.createObjectURL(el)} alt="" />
+              </div>
             ))}
         </div>
         <button

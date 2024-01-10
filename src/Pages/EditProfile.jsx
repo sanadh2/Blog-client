@@ -5,6 +5,8 @@ import { DarkMode } from "../Contexts/DarkMode";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import toast, { Toaster } from "react-hot-toast";
+
 const EditProfile = () => {
   const { isLightMode } = useContext(DarkMode);
   const { userData, setRefreshUser } = useContext(UserData);
@@ -77,6 +79,8 @@ const EditProfile = () => {
       }
     } catch (error) {
       console.error("Error:", error);
+      if (error.response?.data?.success == false)
+        toast.error(error.response?.data?.msg);
     }
   };
 
@@ -91,7 +95,6 @@ const EditProfile = () => {
         details.email !== userData.email ||
         details.username !== userData.username)
     ) {
-      console.log("worked");
       updateUser().then((res) => {
         if (res != undefined) navigate("/home/profile");
       });
@@ -102,6 +105,7 @@ const EditProfile = () => {
 
   return (
     <div className="h-[100svh] w-full">
+      <Toaster position="top right" />
       <h1 className=" text-center text-2xl md:text-4xl font-velodroma-wide py-5">
         Edit Profile
       </h1>

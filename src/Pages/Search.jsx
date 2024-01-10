@@ -57,7 +57,7 @@ const Search = () => {
   return (
     <div className="min-h-svh w-full ">
       <Toaster />
-      <header className=" flex justify-center py-5 ">
+      <header className=" flex w-full justify-center py-5 ">
         <input
           onFocus={() => setOpenSearch(true)}
           className={`w-1/2 bg-inherit outline-none border h-10 pl-2  md::pl-4 rounded-md ${
@@ -94,10 +94,10 @@ const Search = () => {
               id="selectBlog"
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className={`outline-none border  px-4 py-1 ${
+              className={`outline-none border bg-inherit  px-4 py-1 ${
                 isLightMode
-                  ? " border-black text-black"
-                  : "border-white text-white bg-[#11151cff]"
+                  ? " border-black text-black "
+                  : "border-white text-white "
               } `}
             >
               {categories.map((category) => (
@@ -105,7 +105,7 @@ const Search = () => {
                   value={category == "All" ? "" : category}
                   key={category}
                   className={`${
-                    isLightMode ? "bg-[#F2F3AE]" : "bg-[#11151cff]"
+                    isLightMode ? "bg-[#d3d0ca]" : "bg-[#11151cff]"
                   } border `}
                 >
                   {category}

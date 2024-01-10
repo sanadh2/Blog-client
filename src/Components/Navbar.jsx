@@ -23,8 +23,8 @@ const Navbar = () => {
       });
       return result.data;
     } catch (err) {
-      if (err.response) console.error(err.response.data);
-       navigate("/");
+      // if (err.response) console.error(err.response.data);
+      // navigate("/");
     }
   };
 
@@ -35,8 +35,8 @@ const Navbar = () => {
       });
       return result.data;
     } catch (err) {
-      if (err.response) console.error(err.response.data);
-       navigate("/");
+      // if (err.response) console.error(err.response.data);
+      // navigate("/");
     }
   };
 
@@ -63,17 +63,17 @@ const Navbar = () => {
 
   return (
     <div
-      className="relative min-h-[100svh] scroll-smooth flex flex-col-reverse md:flex-row "
+      className="relative min-h-screen scroll-smooth flex flex-col-reverse md:flex-row "
       style={{ backgroundColor: theme.bg, color: theme.text }}
     >
       <nav
         style={{ boxShadow: "0px 1px 3px", backgroundColor: theme.bg }}
-        className="sticky z-50 bottom-0 md:top-0 left-auto md:left-0  flex flex-row flex-nowrap md:flex-col justify-evenly items-center w-screen md:w-[4rem] h-[4rem] md:h-screen"
+        className="fixed z-50 bottom-0 md:top-0 left-auto md:left-0  flex flex-row flex-nowrap md:flex-col justify-evenly items-center w-screen md:w-[4rem] h-[4rem] md:h-screen"
       >
         <button
           className={` w-12 h-12 p-1 rounded-[1000px] ${
             isLightMode
-              ? "hover:bg-amber-200 active:bg-amber-300"
+              ? "hover:bg-[#d3d0ca] active:bg-[#b5b0a6]"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
           onClick={toggleTheme}
@@ -95,7 +95,7 @@ const Navbar = () => {
           to={"/home"}
           className={`p-1 rounded-full ${
             isLightMode
-              ? "hover:bg-amber-200 active:bg-amber-300"
+              ? "hover:bg-[#d3d0ca] active:bg-[#b5b0a6]"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
         >
@@ -117,7 +117,7 @@ const Navbar = () => {
           to={"/home/search"}
           className={`p-1 rounded-full ${
             isLightMode
-              ? "hover:bg-amber-200 active:bg-amber-300"
+              ? "hover:bg-[#d3d0ca] active:bg-[#b5b0a6]"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
         >
@@ -142,7 +142,7 @@ const Navbar = () => {
           to="/home/new-blog"
           className={`p-1 rounded-full ${
             isLightMode
-              ? "hover:bg-amber-200 active:bg-amber-300"
+              ? "hover:bg-[#d3d0ca] active:bg-[#b5b0a6]"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
         >
@@ -189,7 +189,7 @@ const Navbar = () => {
           to="/home/profile"
           className={`p-1 rounded-full ${
             isLightMode
-              ? "hover:bg-amber-200 active:bg-amber-300"
+              ? "hover:bg-[#d3d0ca] active:bg-[#b5b0a6]"
               : "hover:bg-slate-700 active:bg-slate-600"
           }`}
         >
@@ -215,6 +215,7 @@ const Navbar = () => {
             />
           </svg>
         </Link>
+
         <div className="relative modal-container">
           <button className="btn opacity-100 hover:opacity-50">
             <svg
@@ -240,7 +241,9 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-      <Outlet />
+      <div className="mb-16 ml-0 md:mt-0 md:ml-16 w-full h-full">
+        <Outlet />
+      </div>
     </div>
   );
 };

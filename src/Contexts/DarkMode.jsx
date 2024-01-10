@@ -14,7 +14,7 @@ const DarkModeProvider = ({ children }) => {
 
   const theme = isLightMode
     ? {
-        bg: "#F2F3AE",
+        bg: "#F9f6ee",
         text: "black",
         buttonBg: "white",
       }

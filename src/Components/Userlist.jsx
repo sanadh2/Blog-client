@@ -29,7 +29,7 @@ const Userlist = ({ openSearch, closeSearch, lightMode, search }) => {
             <li
               className={`py-1.5  w-full flex items-center px-5 gap-2 rounded cursor-pointer ${
                 lightMode
-                  ? "bg-[#F2F3AE] hover:bg-[#fcff59]"
+                  ? "bg-[#d3d0ca] hover:bg-[#fcff59]"
                   : "bg-[#11151cff] hover:bg-[#202834]"
               }`}
               key={user._id}
@@ -45,7 +45,10 @@ const Userlist = ({ openSearch, closeSearch, lightMode, search }) => {
           ))
         )}
       </ul>
-      <button className="bg-[#ff0000] hover:bg-[#ff0000bb] px-4 py-1 rounded" onClick={closeSearch}>
+      <button
+        className="bg-[#ff0000] hover:bg-[#ff0000bb] px-4 py-1 rounded"
+        onClick={closeSearch}
+      >
         close
       </button>
     </div>

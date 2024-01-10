@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Loader from "../Components/Loader/Loader";
 import { UserData } from "../Contexts/UserData";
 import Modal from "../Components/Modal";
 import Comment from "../Components/Comment";
 import toast, { Toaster } from "react-hot-toast";
 import DOMPurify from "dompurify";
-
+import { IoFlagSharp } from "react-icons/io5";
 import Like from "../Components/Like";
 
 import { DarkMode } from "../Contexts/DarkMode";
@@ -59,25 +59,52 @@ const BlogDetails = () => {
 
   const addComment = async () => {
     try {
-      if (!blogInfo || !userID || comment.length < 1) return;
+      if (!blogInfo || !userData || comment.length < 1) return;
       const result = await axios.post(
         `http://localhost:2222/comment/add-comment`,
-        { comment, blogID: blogInfo._id, userID: userID._id }
+        { comment, blogID: blogInfo._id, userID: userData._id }
       );
-      // setRefreshUser((prev) => !prev);
+      setReload(!reload);
+      setComment("");
     } catch (error) {
       console.log(error);
     }
   };
 
+  const deleteBlog = async () => {
+    try {
+      if (!blogInfo || !userData) return;
+      const result = await axios.delete(
+        `http://localhost:2222/blog/blogs?blogID=${blogInfo._id}&userID=${userData._id}`
+      );
+      setReload(!reload);
+      navigate("/home");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const reportBlog = async () => {
+    try {
+      if (!userData || !blogID) return;
+      const result = await axios.post(
+        `http://localhost:2222/blog/report-blog`,
+        { userID: userData._id, blogID }
+      );
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(blogInfo);
   return (
-    <div className=" px-3 sm:px-7 md:px-10 pb-10 lg:px-12 xl:px-16  w-full min-h-screen overflow-hidden">
+    <div className=" px-3 sm:px-7 md:px-10 pb-10 lg:px-12 xl:px-16  w-full">
       {blogInfo ? (
         <div className="w-full">
-          <h1 className=" font-velodroma-wide my-10 text-xl md:text-3xl leading-relaxed text-left font-bold pl-3    w-fit ">
+          <h1 className=" font-velodroma-wide my-10 text-xl md:text-3xl leading-relaxed text-left font-bold pl-3 ">
             {blogInfo?.title}
           </h1>
-
           <Toaster position="top right" />
           <div
             className={`${
@@ -98,20 +125,33 @@ const BlogDetails = () => {
 
           {contentHTML && (
             <div
-              className="py-10 break-words"
+              className="py-10 break-words content"
               dangerouslySetInnerHTML={{ __html: contentHTML }}
             />
           )}
 
-          <p className=" mb-5">
-            Author: &nbsp;&nbsp;
+          <div className="flex mb-5  justify-between ">
+            <p className="   flex items-center ">
+              Author: &nbsp;&nbsp;
+              <Link
+                className=" text-[#00ff00] cursor-pointer font-bold text-xl font-velodroma  opacity-100 hover:opacity-65"
+                to={`/home/users/${blogInfo.authorID._id}`}
+              >
+                {blogInfo?.authorID.name}
+              </Link>
+            </p>
             <button
-              className=" text-[#00ff00] cursor-pointer font-bold text-xl font-velodroma  opacity-100 hover:opacity-65"
-              onClick={() => navigate(`/home/users/${blogInfo.authorID._id}`)}
+              className="flex gap-1 opacity-100 hover:opacity-75 "
+              onClick={() => reportBlog()}
             >
-              {blogInfo?.authorID.name}
+              <IoFlagSharp
+                className="align-middle"
+                title="Report Blog"
+                size={25}
+              />
+              <span>Report</span>
             </button>
-          </p>
+          </div>
 
           <div className="w-full flex justify-between  items-center mb-10">
             <Like
@@ -126,15 +166,19 @@ const BlogDetails = () => {
                 placeholder="Comment"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                className={`pl-3 w-4/5 ${
-                  isLightMode ? "text-white" : "text-black"
+                className={`pl-3 w-3/5 bg-inherit border rounded outline-none ${
+                  isLightMode
+                    ? "text-black border-black "
+                    : "text-white border-white"
                 }`}
                 id="comment"
               />
               <button
                 onClick={() => addComment()}
-                className={`px-4 py-1 ${
-                  isLightMode ? "bg-white" : "bg-slate-800"
+                className={`px-4 py-1 rounded  transition active:bg-transparent ${
+                  isLightMode
+                    ? "bg-white hover:bg-white/50"
+                    : "bg-slate-800 hover:bg-slate-800/50"
                 }`}
               >
                 Add Comment

@@ -13,13 +13,14 @@ import { DarkMode } from "./Contexts/DarkMode";
 import axios from "axios";
 import User from "./Pages/User";
 import EditProfile from "./Pages/EditProfile";
+import Notifications from "./Pages/Notifications";
 axios.defaults.withCredentials = true;
 const App = () => {
   const { theme } = useContext(DarkMode);
   return (
     <div
       style={{ color: theme.text, backgroundColor: theme.bg }}
-      className=" min-h-screen "
+      className=" min-h-screen overflow-hidden"
     >
       <Router>
         <Routes>
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="blog/:blogID" element={<BlogDetails />} />
             <Route path="users/:userID" element={<User />} />
             <Route path="edit-profile" element={<EditProfile />} />
+            <Route path="profile/notifications" element={<Notifications />} />
           </Route>
         </Routes>
       </Router>

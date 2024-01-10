@@ -42,7 +42,7 @@ const UploadDP = ({ open, closeModal, lightMode, setRefreshUser }) => {
       <Toaster />
       <div
         className={`p-5 relative min-h-80 w-full max-w-[30rem] flex flex-wrap justify-center items-center  ${
-          lightMode ? " bg-[#F2F3AE]" : " bg-[#1d2430] text-white"
+          lightMode ? " bg-[#d3d0ca]" : " bg-[#1d2430] text-white"
         }`}
       >
         <button

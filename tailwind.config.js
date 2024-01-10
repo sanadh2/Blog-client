@@ -15,6 +15,7 @@ export default {
           "Roboto",
           "Arial",
         ],
+        roboto: ["Roboto", "Arial"],
       },
       screens: {
         sm: "425px",

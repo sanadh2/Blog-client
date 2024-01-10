@@ -3,10 +3,12 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { UserData } from "../Contexts/UserData";
 import Modal from "./Modal";
+import { Link } from "react-router-dom";
 
 const Comment = ({ commentObj, setReload }) => {
   const { userData } = useContext(UserData);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
   const deleteComment = async () => {
     try {
       const res = await axios.delete(
@@ -22,14 +24,19 @@ const Comment = ({ commentObj, setReload }) => {
     deleteComment();
   };
   return (
-    <div className="px-10 rounded flex gap-3 relative">
+    <div className="px-10 rounded flex items-center opacity-80 hover:opacity-100 gap-3 relative">
       <img
         src={commentObj.userID.profilePic}
         alt=""
-        className=" aspect-square h-16 object-cover rounded-full"
+        className=" aspect-square h-10 lg:h-16 object-cover rounded-full"
       />
-      <div className="flex flex-col gap-2 justify-center">
-        <p className=" text-lg">{commentObj.userID.name}</p>
+      <div className="flex flex-col gap-0 md:gap-1 lg:gap-2 justify-center">
+        <Link
+          className=" text-lg cursor-pointer"
+          to={`/home/users/${commentObj.userID._id}`}
+        >
+          {commentObj.userID.name}
+        </Link>
         <p className="">{commentObj.comment}</p>
       </div>
       {userData?._id == commentObj.userID._id && (

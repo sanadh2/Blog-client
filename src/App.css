@@ -19,6 +19,7 @@ text::-webkit-scrollbar-track {
 * {
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
 .modal-container > .btn:focus + .modal,
@@ -31,4 +32,8 @@ text::-webkit-scrollbar-track {
 .grid-flow-col::-webkit-scrollbar {
   height: 10px;
   width: auto;
+}
+
+img {
+  user-select: none;
 }

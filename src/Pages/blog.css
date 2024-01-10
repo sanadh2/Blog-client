@@ -1,2 +1,25 @@
+.content {
+  display: flex;
+  flex-direction: column;
+}
+.content section {
+  margin: 0px 0px 30px !important;
+  word-spacing: 2px;
+  letter-spacing: 1px;
+  width: 80%;
+}
+.content h2 {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  font-family: "Roboto";
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  margin: 0px 0px 10px !important;
+}
 
-  
+.content p {
+  font-weight: 100 !important;
+  font-family: "Montserrat", sans-serif !important;
+  margin-left: 1rem;
+}

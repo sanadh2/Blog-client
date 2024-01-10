@@ -12,7 +12,7 @@ const Like = ({ text, onClick, likeInfo, userID }) => {
         {likeInfo.includes(userID) ? (
           <svg
             aria-label="Unlike"
-            class="x1lliihq x1n2onr6 xxk16z8"
+            className="x1lliihq x1n2onr6 xxk16z8"
             fill="red"
             height="24"
             role="img"
@@ -25,7 +25,7 @@ const Like = ({ text, onClick, likeInfo, userID }) => {
         ) : (
           <svg
             aria-label="Like"
-            class="x1lliihq x1n2onr6 xyb1xck"
+            className="x1lliihq x1n2onr6 xyb1xck"
             fill="currentColor"
             height="24"
             role="img"

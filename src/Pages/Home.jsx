@@ -9,6 +9,9 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
   const { userData } = useContext(UserData);
   const [loading, setLoading] = useState(true);
+  const [featuredBlogs, setFeaturedBlogs] = useState([]);
+  const [isFeatured, setIsFeatured] = useState(false);
+
   const getBlogs = async () => {
     try {
       const result = await axios.get(
@@ -20,12 +23,24 @@ const Home = () => {
     }
   };
 
+  const getfeaturedBlogs = async () => {
+    try {
+      const result = await axios.get(
+        `http://localhost:2222/blog/featured-blogs`
+      );
+      console.log(result.data);
+      return result.data;
+    } catch (error) {}
+  };
   useEffect(() => {
+    getfeaturedBlogs().then((res) => setFeaturedBlogs(res.blogs));
     if (userData) {
       getBlogs().then((res) => setBlogs(res));
       setTimeout(() => setLoading(false), 1000);
     }
   }, [userData]);
+
+  console.log(isFeatured);
 
   if (loading) return <Loader />;
   return (
@@ -34,10 +49,29 @@ const Home = () => {
         Welcome to Blog and Blogger
       </h1>
       <Toaster position="top right" />
+      <div className="w-full justify-center text-base md:text-lg xl:text-xl items-center flex gap-10 md:gap-20">
+        <button
+          className={`${
+            !isFeatured && "underline"
+          } decoration-rose-500 underline-offset-4`}
+          onClick={() => setIsFeatured(false)}
+        >
+          Following
+        </button>
+        <button
+          className={`${
+              isFeatured && "underline"
+          } decoration-rose-500 underline-offset-4`}
+          onClick={() => setIsFeatured(true)}
+        >
+          Featured
+        </button>
+      </div>
+
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
-        {blogs?.map((blog) => (
-          <Blog key={blog._id} blog={blog} />
-        ))}
+        {isFeatured
+          ? featuredBlogs.map((blog) => <Blog key={blog._id} blog={blog} />)
+          : blogs.map((blog) => <Blog key={blog._id} blog={blog} />)}
       </div>
     </div>
   );

@@ -66,7 +66,7 @@ const SignIn = () => {
             <label
               htmlFor="username"
               style={{ backgroundColor: theme.bg, color: theme.text }}
-              className={`text`}
+              className={`text `}
             >
               Email / Username
             </label>
@@ -77,7 +77,7 @@ const SignIn = () => {
               type="text"
               placeholder="write here"
               name="usernameEmail"
-              className={`input outline outline-2   placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
+              className={`input outline outline-2 lowercase   placeholder:text-sm placeholder:font-serif focus:placeholder:text-[#f4442e] ${
                 isLightMode
                   ? "outline-black/30 focus:outline-black"
                   : "outline-white/30 focus:outline-white"
