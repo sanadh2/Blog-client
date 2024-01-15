@@ -19,7 +19,7 @@ const User = () => {
   useEffect(() => {
     const getUser = async () => {
       const result = await axios.get(
-        `http://localhost:2222/user/users/${userID}`
+        `https://blog-turm.onrender.com/user/users/${userID}`
       );
       setUser(result.data.user);
     };
@@ -28,10 +28,13 @@ const User = () => {
 
   const follow = async () => {
     try {
-      const res = await axios.patch("http://localhost:2222/user/follow", {
-        followeeID: user._id,
-        userID: userData._id,
-      });
+      const res = await axios.patch(
+        "https://blog-turm.onrender.com/user/follow",
+        {
+          followeeID: user._id,
+          userID: userData._id,
+        }
+      );
       setRefresh(!refresh);
       setRefreshUser((prev) => !prev);
     } catch (error) {
@@ -60,9 +63,12 @@ const User = () => {
   const banUser = async () => {
     try {
       if (!user) return;
-      const result = await axios.patch("http://localhost:2222/user/ban-user", {
-        userID: user._id,
-      });
+      const result = await axios.patch(
+        "https://blog-turm.onrender.com/user/ban-user",
+        {
+          userID: user._id,
+        }
+      );
       setRefresh((prev) => !prev);
     } catch (error) {
       console.log(error);

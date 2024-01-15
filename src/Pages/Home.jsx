@@ -15,7 +15,7 @@ const Home = () => {
   const getBlogs = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:2222/blog/following/${userData._id}`
+        `https://blog-turm.onrender.com/blog/following/${userData._id}`
       );
       return result.data.followingBlogs;
     } catch (err) {
@@ -26,7 +26,7 @@ const Home = () => {
   const getfeaturedBlogs = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:2222/blog/featured-blogs`
+        `https://blog-turm.onrender.com/blog/featured-blogs`
       );
       return result.data;
     } catch (error) {}

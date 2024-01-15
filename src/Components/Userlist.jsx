@@ -9,7 +9,7 @@ const Userlist = ({ openSearch, closeSearch, lightMode, search }) => {
   const searchUsers = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:2222/user/search-users/${search}`
+        `https://blog-turm.onrender.com/user/search-users/${search}`
       );
       return result.data.users;
     } catch (error) {

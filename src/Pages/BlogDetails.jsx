@@ -27,7 +27,7 @@ const BlogDetails = () => {
   const getBlogInfo = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:2222/blog/blogs/single?blogID=${blogID}&userID=${userData._id}`
+        `https://blog-turm.onrender.com/blog/blogs/single?blogID=${blogID}&userID=${userData._id}`
       );
       return result.data;
     } catch (error) {
@@ -48,7 +48,7 @@ const BlogDetails = () => {
     try {
       if (!blogInfo || !userData) return;
       const result = await axios.patch(
-        `http://localhost:2222/blog/blogs/like-unlike`,
+        `https://blog-turm.onrender.com/blog/blogs/like-unlike`,
         { blogID: blogInfo._id, userID: userData._id }
       );
       setReload((prev) => !prev);
@@ -61,7 +61,7 @@ const BlogDetails = () => {
     try {
       if (!blogInfo || !userData || comment.length < 1) return;
       const result = await axios.post(
-        `http://localhost:2222/comment/add-comment`,
+        `https://blog-turm.onrender.com/comment/add-comment`,
         { comment, blogID: blogInfo._id, userID: userData._id }
       );
       setReload(!reload);
@@ -75,7 +75,7 @@ const BlogDetails = () => {
     try {
       if (!blogInfo || !userData) return;
       const result = await axios.delete(
-        `http://localhost:2222/blog/blogs?blogID=${blogInfo._id}&userID=${userData._id}`
+        `https://blog-turm.onrender.com/blog/blogs?blogID=${blogInfo._id}&userID=${userData._id}`
       );
       setReload(!reload);
       navigate("/home");
@@ -88,7 +88,7 @@ const BlogDetails = () => {
     try {
       if (!userData || !blogID) return;
       const result = await axios.post(
-        `http://localhost:2222/blog/report-blog`,
+        `https://blog-turm.onrender.com/blog/report-blog`,
         { userID: userData._id, blogID }
       );
       toast.success("reported");

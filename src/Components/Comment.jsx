@@ -12,7 +12,7 @@ const Comment = ({ commentObj, setReload }) => {
   const deleteComment = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:2222/comment/${commentObj._id}`
+        `https://blog-turm.onrender.com/comment/${commentObj._id}`
       );
       setReload((prev) => !prev);
     } catch (error) {

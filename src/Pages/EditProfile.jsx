@@ -72,7 +72,7 @@ const EditProfile = () => {
       }
       if (Object.keys(updatedData).length > 1) {
         const result = await axios.patch(
-          "http://localhost:2222/user/update-user",
+          "https://blog-turm.onrender.com/user/update-user",
           updatedData
         );
         setRefreshUser((prev) => !prev);

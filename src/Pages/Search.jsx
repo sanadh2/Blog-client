@@ -43,7 +43,9 @@ const Search = () => {
 
   const getBlogs = async () => {
     try {
-      const result = await axios.get("http://localhost:2222/blog/blogs");
+      const result = await axios.get(
+        "https://blog-turm.onrender.com/blog/blogs"
+      );
       return result.data.result;
     } catch (err) {
       console.log(err);

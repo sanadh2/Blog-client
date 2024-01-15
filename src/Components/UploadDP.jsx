@@ -21,10 +21,13 @@ const UploadDP = ({ open, closeModal, lightMode, setRefreshUser }) => {
     if (!img) return;
     try {
       const url = await uploadDp();
-      const res = await axios.patch("http://localhost:2222/user/uploaddp", {
-        imageDp: url,
-        userID: user._id,
-      });
+      const res = await axios.patch(
+        "https://blog-turm.onrender.com/user/uploaddp",
+        {
+          imageDp: url,
+          userID: user._id,
+        }
+      );
       setRefreshUser((prev) => !prev);
       toast.success(res.data.msg);
       return res;

@@ -50,7 +50,7 @@ const SignUp = () => {
   const signUp = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:2222/user/signup",
+        "https://blog-turm.onrender.com/user/signup",
         formData
       );
       return res.data;

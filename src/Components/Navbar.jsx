@@ -18,9 +18,12 @@ const Navbar = () => {
   let flag = true;
   const getUser = async () => {
     try {
-      const result = await axios.get("http://localhost:2222/user/verify", {
-        withCredentials: true,
-      });
+      const result = await axios.get(
+        "https://blog-turm.onrender.com/user/verify",
+        {
+          withCredentials: true,
+        }
+      );
       return result.data;
     } catch (err) {
       console.log(err);
@@ -31,9 +34,12 @@ const Navbar = () => {
 
   const refreshToken = async () => {
     try {
-      const result = await axios.get("http://localhost:2222/user/refresh", {
-        withCredentials: true,
-      });
+      const result = await axios.get(
+        "https://blog-turm.onrender.com/user/refresh",
+        {
+          withCredentials: true,
+        }
+      );
       return result.data;
     } catch (err) {
       console.log(err);
@@ -56,7 +62,9 @@ const Navbar = () => {
 
   const logout = async () => {
     try {
-      const res = await axios.post("http://localhost:2222/user/signout");
+      const res = await axios.post(
+        "https://blog-turm.onrender.com/user/signout"
+      );
       setTimeout(() => navigate("/"), 500);
     } catch (error) {
       console.log(error);

@@ -20,7 +20,10 @@ const SignIn = () => {
 
   const handleSignIn = async (data) => {
     try {
-      const res = await axios.post("http://localhost:2222/user/signin", data);
+      const res = await axios.post(
+        "https://blog-turm.onrender.com/user/signin",
+        data
+      );
       return res;
     } catch (err) {
       console.log(err);

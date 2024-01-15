@@ -58,13 +58,16 @@ const NewBlog = () => {
 
   const createBlog = async () => {
     try {
-      const result = await axios.post("http://localhost:2222/blog/new-blog", {
-        title: blogForm.title,
-        content: blogForm.content,
-        images: URLS,
-        userID: userData._id,
-        category: blogForm.category,
-      });
+      const result = await axios.post(
+        "https://blog-turm.onrender.com/blog/new-blog",
+        {
+          title: blogForm.title,
+          content: blogForm.content,
+          images: URLS,
+          userID: userData._id,
+          category: blogForm.category,
+        }
+      );
       if (imagesUploaded) toast.success("Blog Uploaded");
       navigate("/home");
       return result.data;
