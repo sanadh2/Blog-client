@@ -1,4 +1,5 @@
 import axios from "axios";
+axios.defaults.withCredentials = true;
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Blog from "../Components/Blog";

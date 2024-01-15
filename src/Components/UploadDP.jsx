@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import axios from "axios";
 import { UserData } from "../Contexts/UserData";
+axios.defaults.withCredentials = true;
 
 const UploadDP = ({ open, closeModal, lightMode, setRefreshUser }) => {
   const [img, setImg] = useState();

@@ -3,6 +3,7 @@ import { UserData } from "../Contexts/UserData";
 import UploadDP from "../Components/UploadDP";
 import { DarkMode } from "../Contexts/DarkMode";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 import { useNavigate } from "react-router-dom";
 
 import toast, { Toaster } from "react-hot-toast";

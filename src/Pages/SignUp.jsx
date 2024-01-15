@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DarkMode } from "../Contexts/DarkMode";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {

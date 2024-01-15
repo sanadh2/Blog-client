@@ -6,6 +6,7 @@ import Blog from "../Components/Blog";
 import toast, { Toaster } from "react-hot-toast";
 import Loader from "../Components/Loader/Loader";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 import Userlist from "../Components/Userlist";
 import { trim } from "lodash";
 

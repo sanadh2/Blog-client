@@ -6,6 +6,7 @@ import { UserData } from "../Contexts/UserData";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const NewBlog = () => {
   const [URLS, setURLS] = useState([]);

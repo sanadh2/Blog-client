@@ -1,4 +1,5 @@
 import axios from "axios";
+axios.defaults.withCredentials = true;
 import React, { useContext, useEffect, useState } from "react";
 import Blog from "../Components/Blog";
 import Loader from "../Components/Loader/Loader";

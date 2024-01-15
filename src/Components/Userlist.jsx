@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+axios.defaults.withCredentials = true;
 
 const Userlist = ({ openSearch, closeSearch, lightMode, search }) => {
   const [users, setUsers] = useState([]);

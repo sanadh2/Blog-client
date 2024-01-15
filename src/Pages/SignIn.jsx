@@ -2,6 +2,7 @@ import "./auth.css";
 import React, { useContext, useState } from "react";
 import { DarkMode } from "../Contexts/DarkMode";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 

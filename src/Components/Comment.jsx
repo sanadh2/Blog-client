@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { UserData } from "../Contexts/UserData";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
-
+axios.defaults.withCredentials = true;
 const Comment = ({ commentObj, setReload }) => {
   const { userData } = useContext(UserData);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
