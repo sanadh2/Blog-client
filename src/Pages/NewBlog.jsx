@@ -65,6 +65,7 @@ const NewBlog = () => {
         category: blogForm.category,
       });
       if (imagesUploaded) toast.success("Blog Uploaded");
+      navigate("/home");
       return result.data;
     } catch (err) {
       console.log(err);

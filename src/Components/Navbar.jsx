@@ -23,8 +23,9 @@ const Navbar = () => {
       });
       return result.data;
     } catch (err) {
-      // if (err.response) console.error(err.response.data);
-      // navigate("/");
+      console.log(err);
+      if (err.response) console.error(err.response.data);
+      navigate("/");
     }
   };
 
@@ -35,8 +36,9 @@ const Navbar = () => {
       });
       return result.data;
     } catch (err) {
-      // if (err.response) console.error(err.response.data);
-      // navigate("/");
+      console.log(err);
+      if (err.response) console.error(err.response.data);
+      navigate("/");
     }
   };
 

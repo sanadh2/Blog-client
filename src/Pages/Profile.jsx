@@ -23,12 +23,15 @@ const Profile = () => {
   };
 
   if (!userData) return <Loader />;
-  console.log(userData);
   return (
     <div className=" h-full flex flex-col   w-full">
       <div className="h-[40vh] md:h-[35vh] p-5 sm:px-10 lg:px-16">
         <div className=" flex justify-between sm:justify-start gap-10 text-sm items-center">
-          <div className={`border-2 ${isLightMode?'border-black':'border-white'} border-2 rounded-full`}>
+          <div
+            className={`border-2 ${
+              isLightMode ? "border-black" : "border-white"
+            } border-2 rounded-full`}
+          >
             <img
               src={userData.profilePic}
               alt=""
